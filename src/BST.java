@@ -158,4 +158,14 @@ public class BST {
 
         return true;
     }
+
+    private boolean isBst(TreeNode p, int min, int max) {
+        if (p == null) {
+            return true;
+        }
+        if (p.data < min || p.data > max) {
+            return false;
+        }
+        return isBst(p.left, min, p.data - 1) && isBst(p.right, min, p.data + 1);
+    }
 }
