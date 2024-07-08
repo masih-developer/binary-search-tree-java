@@ -111,4 +111,51 @@ public class BST {
         }
         return bst;
     }
+
+    public boolean delete(int key) {
+        TreeNode p = root;
+        TreeNode q = null;
+        while (p != null && p.data != key) {
+            q = p;
+            if (key < p.data) {
+                p = p.left;
+            } else {
+                p = p.right;
+            }
+        }
+        if (p == null) {
+            return false;
+        }
+
+        if (p.left != null && p.right != null) {
+            TreeNode s = p.left;
+            TreeNode ps = p;
+            while (s.right != null) {
+                ps = s;
+                s = s.right;
+            }
+            p.data = s.data;
+            p = s;
+            q = ps;
+        }
+
+        TreeNode c;
+        if (p.left == null) {
+            c = p.right;
+        } else {
+            c = p.left;
+        }
+
+        if (p == root) {
+            root = c;
+        } else {
+            if (p == q.left) {
+                q.left = c;
+            } else {
+                q.right = c;
+            }
+        }
+
+        return true;
+    }
 }
